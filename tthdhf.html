@@ -32,8 +32,42 @@
     background: rgba(15, 17, 26,0.85);
   }
   .nav-buttons button {
-
+    background: var(--accent);
+    color: var(--bg);
   }
+  .social {
+    display:flex;
+    gap:0.75rem;
+  }
+  .social .icon {
+    width:32px; height:32px;
+    border:2px sloid var(--accent);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:0.7rem;
+    text-decoration:none;
+    color: var(--accent);
+    position: relative;
+    transition: transform .2s;
+  }
+  .social .icon:hover { transform: scale(1.1); }
+  /* Scroll smap containeer */
+  main {
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    height:100vh;
+  }
+  section {
+    min-height:100vm;
+    padding:3rem 1.5rem;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    scroll-snap-align: start;
+    position: relative;
+  }
+  
 </style>
   
 </head>
