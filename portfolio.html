@@ -1,165 +1,277 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sachin jala . portfolio</title>
-   <style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Animated Portfolio Starter</title>
+
+  <style>
     :root {
-      --accent: #68b2a0;
-      --bg-dark: #0f111a;
-      --fg: #f5f7fa;
-      --radius: 999px;
-      --transition: .35s cubic-bezier(.4,.2,.2,1);
-    }
-    *{margin:0;padding:0;box-sizing:border-box;}
-    body {
-      min-height:100vh;
-      background: var(--bg-dark);
-      color: var(--fg);
+      --bg:#0f111a;
+      --fg:#f0f6fc;
+      --accent:#68b2a0;
+      --radius:1rem;
       font-family: system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
-      position: relative;
-      overflow: hidden;
     }
-
-    /* ---------- fixed structure ---------- */
-    .background-wrapper {
-      position: fixed;
-      inset:0;
-      pointer-events:none;
-      z-index:0;
+    * { box-sizing:border-box; }
+    body {
+      margin:0;
+      background: var(--bg);
+      color: var(--fg);
+      scroll-behavior: smooth;
+      overflow-x:hidden;
     }
-
-    #network-canvas, .wave-bg, .pulse-layer {
-      position: absolute;
-      inset:0;
-      width:100%;
-      height:100%;
-    }
-
-    .content {
-      position: relative;
-      z-index: 3;
-      padding: 3rem 1.5rem;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    h1{font-size:clamp(2rem,5vw,3rem);margin-bottom:.5rem;}
-    p{font-size:1.1rem;line-height:1.4;max-width:800px;}
-
-    /* theme / variant control */
-    .theme-switcher {
-      position: fixed;
-      top:1rem;
-      right:1rem;
-      z-index:4;
+    header {
+      position: sticky;
+      top:0;
+      z-index: 10;
       display:flex;
-      gap:.5rem;
+      justify-content: space-between;
+      align-items:center;
+      padding:1rem 1.5rem;
+      backdrop-filter: blur(10px);
+      background: rgba(15,17,26,0.85);
     }
-    .theme-btn {
-      background: rgba(255,255,255,0.08);
-      border:none;
-      padding:.65rem 1rem;
-      border-radius:var(--radius);
+    .nav-buttons button {
+      background: none;
+      border: 2px solid var(--accent);
+      padding: 0.5rem 1rem;
+      margin-left:0.5rem;
+      border-radius: 999px;
+      color: var(--accent);
       cursor:pointer;
-      color:inherit;
-      font-size:.8rem;
-      backdrop-filter: blur(6px);
-      transition: background var(--transition);
+      font-size:0.85rem;
+      font-weight:600;
+      transition: background .25s, color .25s;
     }
-    .theme-btn.active {
+    .nav-buttons button:hover {
       background: var(--accent);
-      color:#0f111a;
+      color: var(--bg);
     }
-
-    /* ---------- animation variant: pulse + network ---------- */
-    .pulse-layer {
-      pointer-events:none;
+    .social {
+      display:flex;
+      gap:0.75rem;
+    }
+    .social .icon {
+      width:32px; height:32px;
+      border:2px solid var(--accent);
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:0.7rem;
+      text-decoration:none;
+      color: var(--accent);
+      position: relative;
       overflow:hidden;
-      mix-blend-mode: screen;
-      z-index:1;
+      transition: transform .2s;
+    }
+    .social .icon:hover { transform: scale(1.1); }
+    /* Scroll snap container */
+    main {
+      scroll-snap-type: y mandatory;
+      overflow-y: scroll;
+      height:100vh;
+    }
+    section {
+      min-height:100vh;
+      padding:3rem 1.5rem;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      scroll-snap-align: start;
+      position: relative;
+    }
+    .hero {
+      text-align:center;
+      position: relative;
+      overflow:hidden;
+    }
+    .typing {
+      font-size:1.5rem;
+      font-weight:600;
+      display:inline-block;
+      position: relative;
+    }
+    .cursor {
+      display:inline-block;
+      width:2px;
+      background: var(--accent);
+      margin-left:4px;
+      animation: blink 0.8s infinite;
+      vertical-align: bottom;
+      height:1em;
+    }
+    @keyframes blink {
+      0%,50% { opacity:1; }
+      51%,100% { opacity:0; }
+    }
+    .circle-wrapper {
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      pointer-events:none;
     }
     .pulse-circle {
-      position:absolute;
-      width: var(--size);
-      height: var(--size);
-      border: 2px solid rgba(104,178,160,0.3);
+      border:2px solid rgba(104,178,160,0.3);
       border-radius:50%;
-      animation: ping 2.5s infinite ease-out;
-      animation-delay: var(--delay);
+      position:absolute;
+      animation: ping 2s infinite;
       mix-blend-mode: screen;
-      opacity:0;
     }
     @keyframes ping {
-      0% {transform: scale(0.6);opacity:.5;}
-      60% {transform: scale(1.4);opacity:0;}
-      100% {opacity:0;}
+      0% { transform: scale(0.7); opacity:0.6; }
+      70% { transform: scale(1.3); opacity:0; }
+      100% { opacity:0; }
+    }
+    .buttons {
+      margin-top:1rem;
+      display:flex;
+      gap:0.75rem;
+      flex-wrap: wrap;
+      justify-content:center;
+    }
+    .hero-button {
+      background: var(--accent);
+      border:none;
+      padding:0.75rem 1.25rem;
+      border-radius:999px;
+      color: var(--bg);
+      cursor:pointer;
+      font-weight:600;
+      transition: filter .2s;
+    }
+    .hero-button:hover { filter: brightness(1.1); }
+
+    .card {
+      background: rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:1rem;
+      padding:1.25rem;
+      max-width:800px;
+      width:100%;
+      margin:1rem 0;
+      position: relative;
+      overflow:hidden;
+      backdrop-filter: blur(6px);
+    }
+    .section-title {
+      text-transform: uppercase;
+      letter-spacing:8px;
+      font-size:0.9rem;
+      margin-bottom:1rem;
+      color: #9aa3b0;
+    }
+    .skills-grid {
+      display:grid;
+      grid-template-columns: repeat(auto-fit,minmax(100px,1fr));
+      gap:1rem;
+      width:100%;
+      max-width:900px;
+    }
+    .skill {
+      position:relative;
+      border-radius:50%;
+      width:80px;
+      height:80px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: rgba(255,255,255,0.07);
+      cursor: pointer;
+      transition: transform .2s;
+    }
+    .skill:hover { transform: scale(1.1); }
+    .skill .label {
+      position:absolute;
+      top:calc(100% + 6px);
+      left:50%;
+      transform:translateX(-50%);
+      background: rgba(255,255,255,0.1);
+      padding:4px 8px;
+      border-radius:6px;
+      font-size:0.65rem;
+      white-space:nowrap;
+      backdrop-filter: blur(8px);
+    }
+    .timeline {
+      display:flex;
+      flex-direction:column;
+      gap:1rem;
+      width:100%;
+    }
+    .role {
+      display:flex;
+      flex-direction:column;
+      gap:0.5rem;
+    }
+    .role-header {
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:0.5rem;
+    }
+    .badge {
+      background: var(--accent);
+      padding:4px 10px;
+      border-radius:999px;
+      font-size:0.75rem;
+      font-weight:600;
+      display:inline-block;
     }
 
-    #network-canvas { z-index:2; }
-
-    /* ---------- animation variant: gradient wave ---------- */
-    .wave-bg {
-      background: linear-gradient(135deg, #1f2e60, #0f1e40 40%, #233d7d);
-      background-size: 300% 300%;
-      animation: wave 20s ease-in-out infinite;
-      filter: brightness(1.05);
-      mix-blend-mode: overlay;
-      z-index:1;
+    /* Simple fade-up on scroll */
+    .fade-up {
+      opacity:0;
+      transform: translateY(15px);
+      transition: opacity .6s ease, transform .6s ease;
     }
-
-    @keyframes wave {
-      0%{background-position:0% 50%;}
-      50%{background-position:100% 50%;}
-      100%{background-position:0% 50%;}
+    .fade-up.visible {
+      opacity:1;
+      transform: translateY(0);
     }
-
-    /* visibility control via data attribute */
-    [data-bg="network"] .wave-bg { display:none; }
-    [data-bg="network"] .pulse-layer { display:block; }
-    [data-bg="network"] #network-canvas { display:block; }
-
-    [data-bg="wave"] .wave-bg { display:block; }
-    [data-bg="wave"] .pulse-layer { display:none; }
-    [data-bg="wave"] #network-canvas { display:none; }
-
-    [data-bg="both"] .wave-bg { display:block; }
-    [data-bg="both"] .pulse-layer { display:block; }
-    [data-bg="both"] #network-canvas { display:block; }
+    @media (min-width:768px){
+      .hero h1 { font-size:3rem; }
+    }
   </style>
-
 </head>
 <body>
 
   <header>
-    <div class="logo"><strong>sachinjala</strong></div>
+    <div class="logo"><strong>MyPortfolio</strong></div>
     <div class="nav-buttons">
-      <button onclick="scrollTosection('about')">About</button>
-      <button onclick="scrollTosection('skill')">Skill</button>
-      <button onclick="scrollTosection('projects')">Projects</button>
+      <button onclick="scrollToSection('about')">About</button>
+      <button onclick="scrollToSection('experience')">Experience</button>
+      <button onclick="scrollToSection('skills')">Skills</button>
+      <button onclick="scrollToSection('projects')">Projects</button>
     </div>
     <div class="social">
-      <a class="icon" herf="https://github.com/Sachin-jala" aira-lebel="github">GH</a>
-      <a class="icon" herf="#" aria-label="linkedin">IN</a>
-      <a class="icon" herf="#" aria-label="twitter">TW</a>
+      <a class="icon" href="#" aria-label="github">GH</a>
+      <a class="icon" href="#" aria-label="linkedin">IN</a>
+      <a class="icon" href="#" aria-label="twitter">TW</a>
     </div>
   </header>
 
   <main>
     <section id="hero" class="hero">
-      <div class="circle-warpper" aial-hidden="true">
-        <div clas="pulse-circle" style="width:180px; height:180px; top:50%; left:50%; transform:translate(-50%,-50%);"></div>
-        <div class="pulse-circle" style="width:260px; height:180px; top:50; left:50%; transform:translate(-50%,-50%); animation-delay:0.3s;"></div>
-        <div class="pulse-circle" style="width: 360px; height:360px; top:50%; left:50%; transform:translate(-50%,-50%); animation-delay:0.6s;"></div>
+      <div class="circle-wrapper" aria-hidden="true">
+        <div class="pulse-circle" style="width:180px; height:180px; top:50%; left:50%; transform:translate(-50%,-50%);"></div>
+        <div class="pulse-circle" style="width:260px; height:260px; top:50%; left:50%; transform:translate(-50%,-50%); animation-delay:0.3s;"></div>
+        <div class="pulse-circle" style="width:360px; height:360px; top:50%; left:50%; transform:translate(-50%,-50%); animation-delay:0.6s;"></div>
       </div>
       <div style="max-width:800px; margin:0 auto; position:relative; z-index:1;">
-        <h2 class="section-title">Full Stck Devloper</h2>
+        <h2 class="section-title">Software Engineer</h2>
         <h1 style="font-size:2.5rem; margin:0.2rem 0;">
-          i like to take challenges <span id="typed-text" class="typing"></span><span class="cursor"></span>
+          I like to take callenges <span id="typed-text" class="typing"></span><span class="cursor"></span>
         </h1>
-        <div class="button">
-          <button class="hero-button" onclick="scrollTosection('about')">About</button>
-          <button class="hero-button" onclick="scrollTosection('skill')">Skills</button>
+        <div class="buttons">
+          <button class="hero-button" onclick="scrollToSection('about')">About</button>
+          <button class="hero-button" onclick="scrollToSection('experience')">Experience</button>
+          <button class="hero-button" onclick="scrollToSection('skills')">Skills</button>
         </div>
       </div>
     </section>
@@ -168,25 +280,130 @@
       <div class="card fade-up">
         <div class="section-title">About</div>
         <div style="display:flex; flex-direction:column; gap:1rem;">
-          <div style="flex:1; min-width:250px;">
-            <img src="HTML/PORTIFOLIO/pic/profilepic.jpg" alt="profile" style="width:180px; height:180px; border-radius:50%; object-fit:cover; border:4px solid var(--accent);">
-          </div>
-          <div style="flex:2; min-width:250px;">
-            <h3>Hello , I'm Sachin jala</h3>
-            <p>I'm a Full Stack Devloper/AIML engineer passionate about building project ai related, with web experiences. I'M a BCA(BAchlor Of Computer Application) student who passinate about how Ai works and love to building Ai related projects.</p>
+          <div style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center;">
+            <div style="flex:1; min-width:200px;">
+              <img src="D:\HTML\portifolio\pic/profilepic.jpg" alt="profile" style="width:180px; height:180px; border-radius:50%; object-fit:cover; border:4px solid var(--accent);">
+            </div>
+            <div style="flex:2; min-width:250px;">
+              <h3>Hello 👋🏼, I'm Sachin jala</h3>
+              <p>I’m a Full-stack Devloper /  AIML Engineer passionate about building aiml prorjects, interactive web experiences. I'm currently prosuing BCA(Bachlor of Computer Applications) at sparsh college computer and management and for my intrest i study Fundamental of Ai & Deep learing though Nptel goverment online learing platform.  </p>
+            </div>
           </div>
         </div>
       </div>
     </section>
+
+    <section id="experience">
+      <div class="card fade-up">
+        <div class="section-title">Experience</div>
+        <div class="timeline">
+          <div class="role">
+            <div class="role-header">
+              <div>
+                <h4 style="margin:0;">Machine Learning Engineer</h4>
+                <div class="badge">Tensora</div>
+              </div>
+              <div style="font-size:0.8rem; color:#9aa3b0;">Aug 19 2024 - Present</div>
+            </div>
+            <ul>
+              <li>Built decentralized AI solutions on a blockchain.</li>
+              <li>Fine-tuned CV & LLM models at scale.</li>
+              <li>Distributed multi-GPU training in cloud environments.</li>
+            </ul>
+          </div>
+
+          <div class="role">
+            <div class="role-header">
+              <div>
+                <h4 style="margin:0;">Mobile App Developer</h4>
+                <div class="badge">Co-Pilot Consulting</div>
+              </div>
+              <div style="font-size:0.8rem; color:#9aa3b0;">Jan 2021 - Aug 2024</div>
+            </div>
+            <ul>
+              <li>Lead front-end mobile development.</li>
+              <li>Local data persistence and offline support.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section id="skills">
       <div class="card fade-up">
         <div class="section-title">Skills</div>
         <div class="skills-grid">
-          
+          <!-- repeat or generate dynamically -->
+          <div class="skill" data-level="90">
+            <div style="font-size:0.8rem;">Python</div>
+            <div class="label">90%</div>
+          </div>
+          <div class="skill" data-level="80">
+            <div style="font-size:0.8rem;">React</div>
+            <div class="label">80%</div>
+          </div>
+          <div class="skill" data-level="70">
+            <div style="font-size:0.8rem;">Docker</div>
+            <div class="label">70%</div>
+          </div>
+          <div class="skill" data-level="60">
+            <div style="font-size:0.8rem;">GraphQL</div>
+            <div class="label">60%</div>
+          </div>
         </div>
       </div>
     </section>
+
+    <section id="projects">
+      <div class="card fade-up">
+        <div class="section-title">Projects</div>
+        <p>Placeholder for your projects—add interactive cards, hover effects, or embedded demos here.</p>
+      </div>
+    </section>
+
   </main>
-  
+
+  <script>
+    // Typing effect
+    const phrases = ["|", "building cool things.", "writing clean code.", "sharing my journey."];
+    let idx = 0, charIdx = 0;
+    const target = document.getElementById("typed-text");
+
+    function type() {
+      const current = phrases[idx];
+      if (charIdx <= current.length) {
+        target.textContent = current.slice(0, charIdx);
+        charIdx++;
+        setTimeout(type, 100);
+      } else {
+        setTimeout(erase, 1200);
+      }
+    }
+    function erase() {
+      const current = phrases[idx];
+      if (charIdx >= 0) {
+        target.textContent = current.slice(0, charIdx);
+        charIdx--;
+        setTimeout(erase, 50);
+      } else {
+        idx = (idx + 1) % phrases.length;
+        setTimeout(type, 300);
+      }
+    }
+    type();
+
+    // Fade-up on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add("visible");
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll(".fade-up").forEach(el => observer.observe(el));
+
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({behavior:"smooth"});
+    }
+  </script>
+
 </body>
 </html>
