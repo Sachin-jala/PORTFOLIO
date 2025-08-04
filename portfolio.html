@@ -7,8 +7,8 @@
 
   <style>
     :root {
-      --bg:#0f111a;
-      --fg:#f0f6fc;
+      --bg:#000B18;
+      --fg:#f6f6f6;
       --accent:#68b2a0;
       --radius:1rem;
       font-family: system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
@@ -245,7 +245,6 @@
     <div class="logo"><strong>MyPortfolio</strong></div>
     <div class="nav-buttons">
       <button onclick="scrollToSection('about')">About</button>
-      <button onclick="scrollToSection('experience')">Experience</button>
       <button onclick="scrollToSection('skills')">Skills</button>
       <button onclick="scrollToSection('projects')">Projects</button>
     </div>
@@ -264,13 +263,12 @@
         <div class="pulse-circle" style="width:360px; height:360px; top:50%; left:50%; transform:translate(-50%,-50%); animation-delay:0.6s;"></div>
       </div>
       <div style="max-width:800px; margin:0 auto; position:relative; z-index:1;">
-        <h2 class="section-title">Software Engineer</h2>
+        <h2 class="section-title">AIML Engineer</h2>
         <h1 style="font-size:2.5rem; margin:0.2rem 0;">
           I like to take callenges <span id="typed-text" class="typing"></span><span class="cursor"></span>
         </h1>
         <div class="buttons">
           <button class="hero-button" onclick="scrollToSection('about')">About</button>
-          <button class="hero-button" onclick="scrollToSection('experience')">Experience</button>
           <button class="hero-button" onclick="scrollToSection('skills')">Skills</button>
         </div>
       </div>
@@ -282,48 +280,12 @@
         <div style="display:flex; flex-direction:column; gap:1rem;">
           <div style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center;">
             <div style="flex:1; min-width:200px;">
-              <img src="D:\HTML\portifolio\pic/profilepic.jpg" alt="profile" style="width:180px; height:180px; border-radius:50%; object-fit:cover; border:4px solid var(--accent);">
+              <img src="pic/profilepic.jpg" alt="profile" style="width:180px; height:180px; border-radius:50%; object-fit:cover; border:4px solid var(--accent);">
             </div>
             <div style="flex:2; min-width:250px;">
               <h3>Hello 👋🏼, I'm Sachin jala</h3>
               <p>I’m a Full-stack Devloper /  AIML Engineer passionate about building aiml prorjects, interactive web experiences. I'm currently prosuing BCA(Bachlor of Computer Applications) at sparsh college computer and management and for my intrest i study Fundamental of Ai & Deep learing though Nptel goverment online learing platform.  </p>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="experience">
-      <div class="card fade-up">
-        <div class="section-title">Experience</div>
-        <div class="timeline">
-          <div class="role">
-            <div class="role-header">
-              <div>
-                <h4 style="margin:0;">Machine Learning Engineer</h4>
-                <div class="badge">Tensora</div>
-              </div>
-              <div style="font-size:0.8rem; color:#9aa3b0;">Aug 19 2024 - Present</div>
-            </div>
-            <ul>
-              <li>Built decentralized AI solutions on a blockchain.</li>
-              <li>Fine-tuned CV & LLM models at scale.</li>
-              <li>Distributed multi-GPU training in cloud environments.</li>
-            </ul>
-          </div>
-
-          <div class="role">
-            <div class="role-header">
-              <div>
-                <h4 style="margin:0;">Mobile App Developer</h4>
-                <div class="badge">Co-Pilot Consulting</div>
-              </div>
-              <div style="font-size:0.8rem; color:#9aa3b0;">Jan 2021 - Aug 2024</div>
-            </div>
-            <ul>
-              <li>Lead front-end mobile development.</li>
-              <li>Local data persistence and offline support.</li>
-            </ul>
           </div>
         </div>
       </div>
@@ -338,18 +300,35 @@
             <div style="font-size:0.8rem;">Python</div>
             <div class="label">90%</div>
           </div>
-          <div class="skill" data-level="80">
-            <div style="font-size:0.8rem;">React</div>
-            <div class="label">80%</div>
-          </div>
-          <div class="skill" data-level="70">
-            <div style="font-size:0.8rem;">Docker</div>
-            <div class="label">70%</div>
-          </div>
           <div class="skill" data-level="60">
-            <div style="font-size:0.8rem;">GraphQL</div>
+            <div style="font-size:0.8rem;">Tensorflow</div>
             <div class="label">60%</div>
           </div>
+          <div class="skill" data-level="50">
+            <div style="font-size:0.8rem;">Numpy</div>
+            <div class="label">50%</div>
+          </div>
+          <div class="skill" data-level="50">
+            <div style="font-size:0.8rem;">Pandas</div>
+            <div class="label">50%</div>
+          </div>
+          <div class="skill" data-level="90">
+            <div style="font-size:0.8;">C</div>
+            <div class="label">90%</div>
+          </div>
+          <div class="skill" data-level="90">
+            <div style="font-size:0.8rem;">C++</div>
+            <div class="label">90%</div>
+          </div>
+          <div class="skill" data-level="40">
+            <div style="font-size:0.8;">Java</div>
+            <div class="label">40%</div>
+          </div>
+          <div class="skill" data-level="90">
+            <div style="font-size:0.8rem;">HTML</div>
+            <div class="label">90%</div>
+          </div>
+
         </div>
       </div>
     </section>
