@@ -251,8 +251,8 @@
       <button onclick="scrollToSection('contact')">Contact</button>
     </div>
     <div class="social">
-      <a class="icon" href="#" aria-label="github">GH</a>
-      <a class="icon" href="#" aria-label="linkedin">IN</a>
+      <a class="icon" href="https://github.com/Sachin-jala" aria-label="github">GH</a>
+      <a class="icon" href="https://www.linkedin.com/iin/Sachin jala " aria-label="linkedin">IN</a>
       <a class="icon" href="#" aria-label="twitter">TW</a>
     </div>
   </header>
@@ -386,6 +386,25 @@
       <div class="card fade-up">
         <div class="section-title">Projects</div>
         <p>Placeholder for your projects—add interactive cards, hover effects, or embedded demos here.</p>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="card fade-up">
+      <div class="section-title">Contact</div>
+      <p>I'd love to hear from you. Fill out the form below or reach me via email.</p>
+      <form action="mailto:jalasachin93@gmail.com" method="post" enctype="text/plain" style="display:flex; flex-direction:column; gap:0.75rem; max-width:400px;">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required style="padding:0.5rem; border-radius:6px; border:1px solid #ccc;"/>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required style="padding:0.5rem; border-radius:6px; border:1px solid #ccc;"/>
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="5" required style="padding:0.5rem; border-radius:6px; border:1px solid #ccc;"></textarea>
+
+        <button type="submit" class="hero-button" style="width:fit-content;">Send Message</button>
+      </form>
       </div>
     </section>
 
