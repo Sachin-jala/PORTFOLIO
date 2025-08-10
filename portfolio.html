@@ -388,24 +388,35 @@
       </div>
     </section>
 
-    <section id="contact">
-      <div class="card fade-up">
-      <div class="section-title">Contact</div>
-      <p>I'd love to hear from you. Fill out the form below or reach me via email.</p>
-      <form action="mailto:jalasachin93@gmail.com" method="post" enctype="text/plain" style="display:flex; flex-direction:column; gap:0.75rem; max-width:400px;">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required style="padding:0.5rem; border-radius:6px; border:1px solid #ccc;"/>
+<section id="contact">
+  <div class="card fade-up">
+    <div class="section-title">Contact</div>
+    <p>Get in touch</p>
+    <form action="https://api.web3forms.com/submit" method="POST"
+      style="display:flex; flex-direction:column; gap:0.75rem; max-width:400px;">
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required style="padding:0.5rem; border-radius:6px; border:1px solid #ccc;"/>
+      <input type="hidden" name="access_key" value="99c3da4e-1b98-4418-8a1c-22685d1dd477">
 
-        <label for="message">Message:</label>
-        <textarea id="message" name="message" rows="5" required style="padding:0.5rem; border-radius:6px; border:1px solid #ccc;"></textarea>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required
+        style="padding:0.5rem; border-radius:6px; border:1px solid #ccc;" />
 
-        <button type="submit" class="hero-button" style="width:fit-content;">Send Message</button>
-      </form>
-      </div>
-    </section>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required
+        style="padding:0.5rem; border-radius:6px; border:1px solid #ccc;" />
+
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" rows="5" required
+        style="padding:0.5rem; border-radius:6px; border:1px solid #ccc;"></textarea>
+
+      <!-- Hidden fields for sender name and reply email -->
+      <input type="hidden" name="from_name" value="Website Contact Form">
+      <input type="hidden" name="replyto" value="your-email@example.com">
+
+      <button type="submit" class="hero-button" style="width:fit-content;">Send Message</button>
+    </form>
+  </div>
+</section>
 
   </main>
 
