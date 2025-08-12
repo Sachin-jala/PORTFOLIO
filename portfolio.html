@@ -1,244 +1,370 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Animated Portfolio Starter</title>
 
   <style>
     :root {
-      --bg:#000B18;
-      --fg:#f6f6f6;
-      --accent:#68b2a0;
-      --radius:1rem;
-      font-family: system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
+      --bg: #000B18;
+      --fg: #f6f6f6;
+      --accent: #68b2a0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     }
-    * { box-sizing:border-box; }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      margin:0;
+      margin: 0;
       background: var(--bg);
       color: var(--fg);
       scroll-behavior: smooth;
-      overflow-x:hidden;
+      overflow-x: hidden;
     }
+
     header {
       position: sticky;
-      top:0;
+      top: 0;
       z-index: 10;
-      display:flex;
+      display: flex;
       justify-content: space-between;
-      align-items:center;
-      padding:1rem 1.5rem;
+      align-items: center;
+      padding: 1rem 1.5rem;
       backdrop-filter: blur(10px);
-      background: rgba(15,17,26,0.85);
+      background: rgba(15, 17, 26, 0.85);
     }
+
     .nav-buttons button {
       background: none;
       border: 2px solid var(--accent);
       padding: 0.5rem 1rem;
-      margin-left:0.5rem;
+      margin-left: 0.5rem;
       border-radius: 999px;
       color: var(--accent);
-      cursor:pointer;
-      font-size:0.85rem;
-      font-weight:600;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
       transition: background .25s, color .25s;
     }
+
     .nav-buttons button:hover {
       background: var(--accent);
       color: var(--bg);
     }
+
     .social {
-      display:flex;
-      gap:0.75rem;
+      display: flex;
+      gap: 0.75rem;
     }
+
     .social .icon {
-      width:32px; height:32px;
-      border:2px solid var(--accent);
-      border-radius:50%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:0.7rem;
-      text-decoration:none;
+      width: 32px;
+      height: 32px;
+      border: 2px solid var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      text-decoration: none;
       color: var(--accent);
       position: relative;
-      overflow:hidden;
+      overflow: hidden;
       transition: transform .2s;
     }
-    .social .icon:hover { transform: scale(1.1); }
-    /* Scroll snap container */
+
+    .social .icon:hover {
+      transform: scale(1.1);
+    }
+
     main {
       scroll-snap-type: y mandatory;
       overflow-y: scroll;
-      height:100vh;
+      height: 100vh;
     }
+
     section {
-      min-height:100vh;
-      padding:3rem 1.5rem;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
+      min-height: 100vh;
+      padding: 3rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       scroll-snap-align: start;
       position: relative;
     }
+
     .hero {
-      text-align:center;
+      text-align: center;
       position: relative;
-      overflow:hidden;
+      overflow: hidden;
     }
+
     .typing {
-      font-size:1.5rem;
-      font-weight:600;
-      display:inline-block;
+      font-size: 1.5rem;
+      font-weight: 600;
+      display: inline-block;
       position: relative;
     }
+
     .cursor {
-      display:inline-block;
-      width:2px;
+      display: inline-block;
+      width: 2px;
       background: var(--accent);
-      margin-left:4px;
+      margin-left: 4px;
       animation: blink 0.8s infinite;
       vertical-align: bottom;
-      height:1em;
+      height: 1em;
     }
+
     @keyframes blink {
-      0%,50% { opacity:1; }
-      51%,100% { opacity:0; }
+
+      0%,
+      50% {
+        opacity: 1;
+      }
+
+      51%,
+      100% {
+        opacity: 0;
+      }
     }
+
     .circle-wrapper {
-      position:absolute;
-      inset:0;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      pointer-events:none;
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
     }
+
     .pulse-circle {
-      border:2px solid rgba(104,178,160,0.3);
-      border-radius:50%;
-      position:absolute;
+      border: 2px solid rgba(104, 178, 160, 0.3);
+      border-radius: 50%;
+      position: absolute;
       animation: ping 2s infinite;
       mix-blend-mode: screen;
     }
+
     @keyframes ping {
-      0% { transform: scale(0.7); opacity:0.6; }
-      70% { transform: scale(1.3); opacity:0; }
-      100% { opacity:0; }
+      0% {
+        transform: scale(0.7);
+        opacity: 0.6;
+      }
+
+      70% {
+        transform: scale(1.3);
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 0;
+      }
     }
+
     .buttons {
-      margin-top:1rem;
-      display:flex;
-      gap:0.75rem;
+      margin-top: 1rem;
+      display: flex;
+      gap: 0.75rem;
       flex-wrap: wrap;
-      justify-content:center;
+      justify-content: center;
     }
+
     .hero-button {
       background: var(--accent);
-      border:none;
-      padding:0.75rem 1.25rem;
-      border-radius:999px;
+      border: none;
+      padding: 0.75rem 1.25rem;
+      border-radius: 999px;
       color: var(--bg);
-      cursor:pointer;
-      font-weight:600;
+      cursor: pointer;
+      font-weight: 600;
       transition: filter .2s;
     }
-    .hero-button:hover { filter: brightness(1.1); }
+
+    .hero-button:hover {
+      filter: brightness(1.1);
+    }
 
     .card {
-      background: rgba(255,255,255,0.05);
-      border:1px solid rgba(255,255,255,0.08);
-      border-radius:1rem;
-      padding:1.25rem;
-      max-width:800px;
-      width:100%;
-      margin:1rem 0;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 1rem;
+      padding: 1.25rem;
+      max-width: 800px;
+      width: 100%;
+      margin: 1rem 0;
       position: relative;
-      overflow:hidden;
+      overflow: hidden;
       backdrop-filter: blur(6px);
     }
+
     .section-title {
       text-transform: uppercase;
-      letter-spacing:8px;
-      font-size:0.9rem;
-      margin-bottom:1rem;
+      letter-spacing: 8px;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
       color: #9aa3b0;
     }
+
     .skills-grid {
-      display:grid;
-      grid-template-columns: repeat(auto-fit,minmax(100px,1fr));
-      gap:1rem;
-      width:100%;
-      max-width:900px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 1rem;
+      width: 100%;
+      max-width: 900px;
     }
+
     .skill {
-      position:relative;
-      border-radius:50%;
-      width:80px;
-      height:80px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background: rgba(255,255,255,0.07);
+      position: relative;
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.07);
       cursor: pointer;
       transition: transform .2s;
     }
-    .skill:hover { transform: scale(1.1); }
-    .skill .label {
-      position:absolute;
-      top:calc(100% + 6px);
-      left:50%;
-      transform:translateX(-50%);
-      background: rgba(255,255,255,0.1);
-      padding:4px 8px;
-      border-radius:6px;
-      font-size:0.65rem;
-      white-space:nowrap;
-      backdrop-filter: blur(8px);
-    }
-    .timeline {
-      display:flex;
-      flex-direction:column;
-      gap:1rem;
-      width:100%;
-    }
-    .role {
-      display:flex;
-      flex-direction:column;
-      gap:0.5rem;
-    }
-    .role-header {
-      display:flex;
-      justify-content: space-between;
-      align-items:center;
-      flex-wrap:wrap;
-      gap:0.5rem;
-    }
-    .badge {
-      background: var(--accent);
-      padding:4px 10px;
-      border-radius:999px;
-      font-size:0.75rem;
-      font-weight:600;
-      display:inline-block;
+
+    .skill:hover {
+      transform: scale(1.1);
     }
 
-    /* Simple fade-up on scroll */
+    .skill .label {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.1);
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 0.65rem;
+      white-space: nowrap;
+      backdrop-filter: blur(8px);
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      width: 100%;
+    }
+
+    .role {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .role-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .badge {
+      background: var(--accent);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      display: inline-block;
+    }
+
+    /* Contact form style */
+    #contact-form input,
+    #contact-form textarea {
+      padding: 0.5rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    /* Chatbot Styles */
+    #chat-container {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1rem;
+      height: 350px;
+    }
+
+    #chat-box {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0.5rem;
+      margin-bottom: 0.5rem;
+      max-height: 280px;
+    }
+
+    .message {
+      margin: 0.5rem 0;
+      padding: 0.5rem;
+      border-radius: 8px;
+      max-width: 80%;
+    }
+
+    .user {
+      background: var(--accent);
+      color: var(--bg);
+      align-self: flex-end;
+    }
+
+    .bot {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--fg);
+      align-self: flex-start;
+    }
+
+    #chat-input-area {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    #chat-input {
+      flex: 1;
+      padding: 0.5rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    #send-btn {
+      background: var(--accent);
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      color: var(--bg);
+      cursor: pointer;
+    }
+
+    #send-btn:hover {
+      filter: brightness(1.1);
+    }
+
+    /* Fade-up on scroll */
     .fade-up {
-      opacity:0;
+      opacity: 0;
       transform: translateY(15px);
       transition: opacity .6s ease, transform .6s ease;
     }
+
     .fade-up.visible {
-      opacity:1;
+      opacity: 1;
       transform: translateY(0);
-    }
-    @media (min-width:768px){
-      .hero h1 { font-size:3rem; }
     }
   </style>
 </head>
+
 <body>
 
   <header>
@@ -248,26 +374,33 @@
       <button onclick="scrollToSection('skills')">Skills</button>
       <button onclick="scrollToSection('education')">Education</button>
       <button onclick="scrollToSection('projects')">Projects</button>
+      <button onclick="scrollToSection('chatbot')">Chatbot</button>
       <button onclick="scrollToSection('contact')">Contact</button>
     </div>
     <div class="social">
       <a class="icon" href="https://github.com/Sachin-jala" aria-label="github">GH</a>
-      <a class="icon" href="https://www.linkedin.com/iin/Sachin jala " aria-label="linkedin">IN</a>
+      <a class="icon" href="#" aria-label="linkedin">IN</a>
       <a class="icon" href="#" aria-label="twitter">TW</a>
     </div>
   </header>
 
   <main>
+    <!-- HERO SECTION -->
     <section id="hero" class="hero">
       <div class="circle-wrapper" aria-hidden="true">
-        <div class="pulse-circle" style="width:180px; height:180px; top:50%; left:50%; transform:translate(-50%,-50%);"></div>
-        <div class="pulse-circle" style="width:260px; height:260px; top:50%; left:50%; transform:translate(-50%,-50%); animation-delay:0.3s;"></div>
-        <div class="pulse-circle" style="width:360px; height:360px; top:50%; left:50%; transform:translate(-50%,-50%); animation-delay:0.6s;"></div>
+        <div class="pulse-circle" style="width:180px; height:180px; top:50%; left:50%; transform:translate(-50%,-50%);">
+        </div>
+        <div class="pulse-circle"
+          style="width:260px; height:260px; top:50%; left:50%; transform:translate(-50%,-50%); animation-delay:0.3s;">
+        </div>
+        <div class="pulse-circle"
+          style="width:360px; height:360px; top:50%; left:50%; transform:translate(-50%,-50%); animation-delay:0.6s;">
+        </div>
       </div>
       <div style="max-width:800px; margin:0 auto; position:relative; z-index:1;">
         <h2 class="section-title">AIML Engineer</h2>
         <h1 style="font-size:2.5rem; margin:0.2rem 0;">
-          I like to take callenges <span id="typed-text" class="typing"></span><span class="cursor"></span>
+          I like to take challenges <span id="typed-text" class="typing"></span><span class="cursor"></span>
         </h1>
         <div class="buttons">
           <button class="hero-button" onclick="scrollToSection('about')">About</button>
@@ -277,7 +410,8 @@
       </div>
     </section>
 
-    <section id="about">
+    <!-- ABOUT SECTION -->
+     <section id="about">
       <div class="card fade-up">
         <div class="section-title">About</div>
         <div style="display:flex; flex-direction:column; gap:1rem;">
@@ -296,7 +430,8 @@
       </div>
     </section>
 
-    <section id="skills">
+    <!-- SKILLS SECTION -->
+      <section id="skills">
       <div class="card fade-up">
         <div class="section-title">Skills</div>
         <div class="skills-grid">
@@ -338,6 +473,7 @@
       </div>
     </section>
 
+    <!-- EDUCATION SECTION -->
     <section id="education">
       <div class="card fade-up">
         <div class="section-title">Education</div>
@@ -378,51 +514,56 @@
               <span class="badge">447</span>
             </div>
             <p>Malusanta Govt High School, Damanjodi</p>
-      </div>
+          </div>
     </section>
 
+
+    <!-- PROJECTS SECTION -->
     <section id="projects">
       <div class="card fade-up">
         <div class="section-title">Projects</div>
-        <p>Placeholder for your projects—add interactive cards, hover effects, or embedded demos here.</p>
+        <p>Project</p>
       </div>
     </section>
 
-<section id="contact">
-  <div class="card fade-up">
-    <div class="section-title">Contact</div>
-    <p>Get in touch</p>
-    <form action="https://api.web3forms.com/submit" method="POST"
-      style="display:flex; flex-direction:column; gap:0.75rem; max-width:400px;">
+    <!-- CHATBOT SECTION -->
+    <section id="chatbot">
+      <div class="card fade-up">
+        <div class="section-title">AI Chatbot</div>
+        <p>Ask me anything! 💬</p>
+        <div id="chat-container">
+          <div id="chat-box"></div>
+          <div id="chat-input-area">
+            <input type="text" id="chat-input" placeholder="Type your message..." />
+            <button id="send-btn">Send</button>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      <input type="hidden" name="access_key" value="99c3da4e-1b98-4418-8a1c-22685d1dd477">
-
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" required
-        style="padding:0.5rem; border-radius:6px; border:1px solid #ccc;" />
-
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required
-        style="padding:0.5rem; border-radius:6px; border:1px solid #ccc;" />
-
-      <label for="message">Message:</label>
-      <textarea id="message" name="message" rows="5" required
-        style="padding:0.5rem; border-radius:6px; border:1px solid #ccc;"></textarea>
-
-      <!-- Hidden fields for sender name and reply email -->
-      <input type="hidden" name="from_name" value="Website Contact Form">
-      <input type="hidden" name="replyto" value="your-email@example.com">
-
-      <button type="submit" class="hero-button" style="width:fit-content;">Send Message</button>
-    </form>
-  </div>
-</section>
-
+    <!-- CONTACT SECTION -->
+    <section id="contact">
+      <div class="card fade-up">
+        <div class="section-title">Contact</div>
+        <p>Get in touch with me directly using this form:</p>
+        <form id="contact-form" action="https://api.web3forms.com/submit" method="POST"
+          style="display:flex; flex-direction:column; gap:1rem;">
+          <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required>
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required>
+          <label for="message">Message:</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+          <button type="submit" class="hero-button">Send Message</button>
+        </form>
+      </div>
+    </section>
   </main>
 
   <script>
     // Typing effect
-    const phrases = ["|", "building cool things.", "writing clean code.", "sharing my journey."];
+    const phrases = ["building cool things.", "writing clean code.", "sharing my journey."];
     let idx = 0, charIdx = 0;
     const target = document.getElementById("typed-text");
 
@@ -449,7 +590,7 @@
     }
     type();
 
-    // Fade-up on scroll
+    // Fade-up animation
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) e.target.classList.add("visible");
@@ -458,9 +599,41 @@
     document.querySelectorAll(".fade-up").forEach(el => observer.observe(el));
 
     function scrollToSection(id) {
-      document.getElementById(id).scrollIntoView({behavior:"smooth"});
+      document.getElementById(id).scrollIntoView({ behavior: "smooth" });
     }
+
+    // Chatbot logic
+    const chatBox = document.getElementById("chat-box");
+    const chatInput = document.getElementById("chat-input");
+    const sendBtn = document.getElementById("send-btn");
+
+    function appendMessage(content, sender) {
+      const msg = document.createElement("div");
+      msg.classList.add("message", sender);
+      msg.textContent = content;
+      chatBox.appendChild(msg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    async function botReply(userMsg) {
+      const reply = `You said: "${userMsg}". I'm still learning to chat like a pro! 🤖`;
+      appendMessage(reply, "bot");
+    }
+
+    sendBtn.addEventListener("click", () => {
+      const userMsg = chatInput.value.trim();
+      if (userMsg) {
+        appendMessage(userMsg, "user");
+        chatInput.value = "";
+        setTimeout(() => botReply(userMsg), 500);
+      }
+    });
+
+    chatInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") sendBtn.click();
+    });
   </script>
 
 </body>
+
 </html>
