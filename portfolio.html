@@ -381,8 +381,8 @@
     </div>
     <div class="social">
       <a class="icon" href="https://github.com/Sachin-jala" aria-label="github">GH</a>
-      <a class="icon" href="#" aria-label="linkedin">IN</a>
-      <a class="icon" href="#" aria-label="twitter">TW</a>
+      <a class="icon" href="https://www.linkedin.com/in/sachin-jala" aria-label="linkedin">IN</a>
+      <a class="icon" href="https://x.com/SachinJala33297" aria-label="twitter">TW</a>
     </div>
   </header>
 
@@ -426,7 +426,8 @@
               <h3>Hello 👋🏼, I'm Sachin jala</h3>
               <p>I’m a AIML Engineer passionate about building smart, scalable,and creative solution. With strong in
                 <strong>AI,Machine Learning</strong>. I lovr transforming idias into working application that solve
-                real-world problems. </p>
+                real-world problems.
+              </p>
               <p>I enjoy learning and experimenting with new technologics,whether it's devloping a chatbot, voice
                 assistand, or diving deep into neural netwoks.</p>
               <p>I'm always looking for exciting projects and collaboratio. Let's build some amazing together!</p>
@@ -469,9 +470,19 @@
             <span>Java</span>
             <div class="percentage">78%</div>
           </div>
+          <div class="skill" data-percent="80%">
+            <span>HTML</span>
+            <div class="percentage">78%</div>
+          </div>
+          <div class="skill" data-percent="75%">
+            <span>CSS</span>
+            <div class="percentage">75%</div>
+          </div>
+          <div class="skill" data-percent="70%">
+            <span>JavaScript</span>
+            <div class="percentage">70%</div>
+          </div>
         </div>
-
-      </div>
       </div>
     </section>
 
@@ -565,6 +576,10 @@
     </section>
   </main>
 
+  <!-- External scripts first -->
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script src="config.js"></script>
+
   <script>
     // Typing effect
     const phrases = ["building cool things.", "writing clean code.", "sharing my journey."];
@@ -648,7 +663,27 @@
     chatInput.addEventListener("keypress", (e) => {
       if (e.key === "Enter") sendBtn.click();
     });
+    // Initialize EmailJS
+    (function () {
+      emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
+    })();
+    document.getElementById("contact-form").addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      emailjs.sendForm(
+        EMAILJS_CONFIG.SERVICE_ID,
+        EMAILJS_CONFIG.TEMPLATE_ID,
+        this
+      ).then(() => {
+        document.getElementById("form-status").innerText = "✅ Message sent successfully!";
+        this.reset();
+      }, (error) => {
+        console.error("Error:", error);
+        document.getElementById("form-status").innerText = "❌ Failed to send message.";
+      });
+    });
   </script>
+
 
 </body>
 
